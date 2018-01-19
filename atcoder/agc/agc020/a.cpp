@@ -31,20 +31,15 @@ int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
-int n, q;
-int l[105], r[105], t[105];
-int a[105];
+int n, a, b;
 /**********************************************/
 
 int main(){
-    cin >> n >> q;
-    REP(i, q) cin >> l[i] >> r[i] >> t[i];
+    cin >> n >> a >> b;
 
-    REP(i, q){
-        FOR(j, l[i]-1, r[i]){
-            a[j] = t[i];
-        }
+    if((b - a) % 2 == 0){
+        cout << "Alice" << endl;
+    }else{
+        cout << "Borys" << endl;
     }
-
-    REP(i, n) cout << a[i] << endl;
 }
