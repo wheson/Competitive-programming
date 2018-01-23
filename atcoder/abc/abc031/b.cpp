@@ -31,9 +31,20 @@ int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
-
+int l, h;
+int n;
+int a[55];
 /**********************************************/
 
 int main(){
+    cin >> l >> h >> n;
+    REP(i, n){
+        cin >> a[i];
+    }
 
+    REP(i, n){
+        if(a[i] > h) cout << -1 << endl;
+        else if(a[i] >= l) cout << 0 << endl;
+        else cout << l - a[i] << endl;
+    }
 }
