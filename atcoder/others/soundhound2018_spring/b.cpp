@@ -31,53 +31,21 @@ int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
-int n, k;
-vector<string> ans_str = {"POSSIBLE", "IMPOSSIBLE"};
+int n, l, r;
 int a[100005];
 /**********************************************/
 
-LL euclidean(LL a, LL b){
-    if(a < b) swap(a, b);
-    LL r = a % b;
-    while(r != 0){
-        a = b;
-        b = r;
-        r = a % b;
-    }
-
-    return b;
-}
-
-LL gcd(LL a, LL b){
-    return euclidean(a, b);
-}
-
-LL lcm(LL a, LL b){
-    return a * b / gcd(a, b);
-}
-
 int main(){
-    cin >> n >> k;
+    cin >> n >> l >> r;
     REP(i, n) cin >> a[i];
-    
-    int max_num = 0;
-    REP(i, n){
-        if(a[i] > max_num) max_num = a[i];
-    }
-    
-    if(max_num < k){
-        cout << ans_str[1] << endl;
-        return 0;
-    }
 
-    int num = a[0];
-    FOR(i, 1, n){
-        num = gcd(a[i], num);
+    REP(i, n){
+        int b;
+        if(a[i] < l) b = l;
+        else if(a[i] <= r) b = a[i];
+        else b = r;
+        cout << b;
+        if(i != n-1) cout << " ";
     }
-    if(k % num == 0){
-        cout << ans_str[0] << endl;
-    }else{
-        cout << ans_str[1] << endl;
-    }
-    
+    cout << endl;
 }

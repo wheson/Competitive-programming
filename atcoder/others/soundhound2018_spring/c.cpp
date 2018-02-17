@@ -31,53 +31,37 @@ int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
-int n, k;
-vector<string> ans_str = {"POSSIBLE", "IMPOSSIBLE"};
-int a[100005];
+int r, c;
+vector<string> C;
+int ans = 0;
 /**********************************************/
 
-LL euclidean(LL a, LL b){
-    if(a < b) swap(a, b);
-    LL r = a % b;
-    while(r != 0){
-        a = b;
-        b = r;
-        r = a % b;
-    }
-
-    return b;
-}
-
-LL gcd(LL a, LL b){
-    return euclidean(a, b);
-}
-
-LL lcm(LL a, LL b){
-    return a * b / gcd(a, b);
-}
-
 int main(){
-    cin >> n >> k;
-    REP(i, n) cin >> a[i];
+    cin >> r >> c;
+    C.resize(r+5);
+    REP(i, r) cin >> C[i];
     
-    int max_num = 0;
-    REP(i, n){
-        if(a[i] > max_num) max_num = a[i];
+    int cnt = 0;
+    REP(i, r){
+        REP(j, c){
+            if(j % 2 == 1 && i % 2 == 0 && C[i][j] == '.'){
+                cnt++;
+            }else if(j % 2 == 0 && i % 2 == 1 && C[i][j] == '.'){
+                cnt++;
+            }
+        }
     }
-    
-    if(max_num < k){
-        cout << ans_str[1] << endl;
-        return 0;
+    ans = cnt;
+    cnt = 0;
+    REP(i, r){
+        REP(j, c){
+            if(j % 2 == 1 && i % 2 == 1 && C[i][j] == '.'){
+                cnt++;
+            }else if(j % 2 == 0 && i % 2 == 0 && C[i][j] == '.'){
+                cnt++;
+            }
+        }
     }
-
-    int num = a[0];
-    FOR(i, 1, n){
-        num = gcd(a[i], num);
-    }
-    if(k % num == 0){
-        cout << ans_str[0] << endl;
-    }else{
-        cout << ans_str[1] << endl;
-    }
-    
+    ans = max(cnt, ans);
+    cout << ans << endl;
 }
