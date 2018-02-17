@@ -31,33 +31,21 @@ int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
-int n;
-vector<LL> a;
-map<LL, LL> b;
+int n, m;
+int l[200005], r[200005], d[200005];
+LL graph[100005];
 /**********************************************/
 
 int main(){
-    cin >> n;
-    a.resize(n+5);
-    REP(i, n) cin >> a[i];
-        sort(a.begin(), a.end(), std::greater<LL>());
+    cin >> n >> m;
+    REP(i, m) cin >> l[i] >> r[i] >> d[i];
     
-    LL pre = -1;
-    LL tmp = -1;
-    int cnt = 0;
-    REP(i, n){
-        if(cnt == 1 && pre == a[i]){
-            LL ans = tmp * a[i];
-            cout << ans << endl;
-            return 0;
-        }else if(cnt == 0 && pre == a[i]){
-            tmp = a[i];
-            pre = -1;
-            cnt++;
-        }else{
-            pre = a[i];
+    REP(i, n+1){
+        graph[i] = INF;
+    }
+    graph[l[0]] = 0; graph[r[0]] = d[0];
+    FOR(i, 1, m){
+        if(graph[l[i]] == INF && graph[r[i]] == INF){
         }
     }
-
-    cout << 0 << endl;
 }
