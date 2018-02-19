@@ -30,41 +30,20 @@ typedef pair<LL, LP> LPP;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
-LL change_div_mul_mod(LL divisor, LL mod_minus_2, LL mod){
-    if(mod_minus_2 == 0) return 1;
-    else if(mod_minus_2 % 2 == 0){
-        LL d = change_div_mul_mod(divisor, mod_minus_2/2, mod);
-        return (d * d) % mod;
-    }else{
-        return (divisor * change_div_mul_mod(divisor, mod_minus_2-1, mod)) % mod;
-    }
-}
-
-#define int long long
+//#define int long long
 
 /*************** using variables ***************/
-string str;
-LL ans = 0;
+int n, a;
 /**********************************************/
 
-int ctoi(char c){
-    return (int)(c - '0');
-}
-
 signed main(){
-    cin >> str;
-    
-    bool flag0 = false;
-    for(int i = 0; i < str.size(); i++){
-        if(str[i] == '+'){
-            if(!flag0) ans++;
-            flag0 = false;
-        }else if(str[i] == '*'){
-        
-        }else{
-            if(str[i] == '0') flag0 = true;
-        }
+    cin >> n >> a;
+
+    if(a >= 500){
+        cout << "Yes" << endl;
+    }else if(n % 500 <= a){
+        cout << "Yes" << endl;
+    }else{
+        cout << "No" << endl;
     }
-    if(!flag0) ans++;
-    cout << ans << endl;
 }

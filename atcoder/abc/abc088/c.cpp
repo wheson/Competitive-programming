@@ -19,7 +19,7 @@
 #define VSORT(v) sort(v.begin(), v.end());
 #define pb(a) push_back(a)
 #define all(x) (x).begin(),(x).end()
-#define INF (LL)1e15
+#define INF (int)1e8
 #define MOD 1000000007
 using namespace std;
 typedef long long LL;
@@ -30,41 +30,36 @@ typedef pair<LL, LP> LPP;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
-LL change_div_mul_mod(LL divisor, LL mod_minus_2, LL mod){
-    if(mod_minus_2 == 0) return 1;
-    else if(mod_minus_2 % 2 == 0){
-        LL d = change_div_mul_mod(divisor, mod_minus_2/2, mod);
-        return (d * d) % mod;
-    }else{
-        return (divisor * change_div_mul_mod(divisor, mod_minus_2-1, mod)) % mod;
-    }
-}
-
-#define int long long
+//#define int long long
 
 /*************** using variables ***************/
-string str;
-LL ans = 0;
+int c[3][3];
+int a[3], b[3];
 /**********************************************/
 
-int ctoi(char c){
-    return (int)(c - '0');
-}
-
 signed main(){
-    cin >> str;
-    
-    bool flag0 = false;
-    for(int i = 0; i < str.size(); i++){
-        if(str[i] == '+'){
-            if(!flag0) ans++;
-            flag0 = false;
-        }else if(str[i] == '*'){
-        
-        }else{
-            if(str[i] == '0') flag0 = true;
+    REP(i, 3){
+        REP(j, 3){
+            cin >> c[i][j];
         }
     }
-    if(!flag0) ans++;
-    cout << ans << endl;
+    
+    a[0] = 0;
+    REP(i, 3){
+        b[i] = c[0][i] - a[0];
+    }
+    FOR(i, 1, 3){
+        a[i] = c[i][0] - b[0];
+    }
+
+    REP(i, 3){
+        REP(j, 3){
+            if(a[i] + b[j] != c[i][j]){
+                cout << "No" << endl;
+                return 0;
+            }
+        }
+    }
+
+    cout << "Yes"  << endl;
 }

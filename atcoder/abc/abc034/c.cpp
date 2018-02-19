@@ -30,6 +30,16 @@ typedef pair<LL, LP> LPP;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
+LL exchange_div_mal_mod(LL divisor, LL mod_minus_2, LL mod){
+    if(mod_minus_2 == 0) return 1;
+    else if(mod_minus_2 % 2 == 0){
+        LL d = exchange_div_mal_mod(divisor, mod_minus_2/2, mod);
+        return (d * d) % mod;
+    }else{
+        return (divisor * exchange_div_mal_mod(divisor, mod_minus_2-1, mod)) % mod;
+    }
+}
+
 //#define int long long
 
 /*************** using variables ***************/
@@ -40,14 +50,10 @@ LL ans = 1;
 signed main(){
     cin >> w >> h;
      
-    LL num2 = min(w-1, h-1);
-    LL cnt = 2;
-    for(int i = w+h-2; i > max(w-1, h-1); i--){
-        ans = ans * i % MOD;
-        while(ans % cnt == 0 && cnt <= num2){
-            ans /= cnt;
-            cnt++;
-        }
+    for(int i = w+h-2; i > h-1; i--) ans = (ans * i) % MOD;
+
+    for(int i = 1; i <= w-1; i++){
+        ans = (ans * exchange_div_mal_mod(i, MOD-2, MOD)) % MOD;    
     }
     
     cout << ans << endl;
