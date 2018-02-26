@@ -44,45 +44,48 @@ LL change_div_mul_mod(LL divisor, LL mod_minus_2, LL mod){
 
 /*************** using variables ***************/
 LL n;
-int depth = 0;
+string s;
 /**********************************************/
 
+int ctoi(char c){
+    return (int)(c - '0');
+}
+
 signed main(){
+    /*cin >> s;
+
+    int z = s.size();
+    int ans = 0;
+    REP(i, z-1){
+        ans += 9;
+    }
+    
+    int ans2 = 0;
+    REP(i, z){
+        ans2 += ctoi(s[i]);
+    }
+    
+    int ans3 = 0;
+    REPR(i, z-1){
+        if(ctoi(s[i]) != '9'){
+            ans3 += 8;
+        }else{
+            ans3 += 9;
+        }
+    }
+    cout << max(ans, ans2) << endl;
+    
+    */
     cin >> n;
-    
-    LL nn = n;
-    while(nn > 0){
-        depth++;
-        nn /= 2;
-    }
-    
-    if(depth % 2 == 1){
-        LL num = 1;
-        bool is_takahashi = true;
-        while(1){
-            if(is_takahashi == true){
-                num = num * 2 + 1;
-            }else{
-                num = num * 2;
-            }
-            if(num > n) break;
-            is_takahashi = !is_takahashi;
+    LL ans = 0;
+    while(n > 0){
+        if(n / 10 != 0 && n % 10 != 9){
+            n -= 10;
+            n += 9 - n % 10;
         }
-        if(is_takahashi) cout << "Aoki" << endl;
-        else cout << "Takahashi" << endl;
-    }else{
-        LL num = 1;
-        bool is_takahashi = true;
-        while(1){
-            if(is_takahashi == true){
-                num = num * 2;
-            }else{
-                num = num * 2 + 1;
-            }
-            if(num > n) break;
-            is_takahashi = !is_takahashi;
-        }
-        if(is_takahashi) cout << "Aoki" << endl;
-        else cout << "Takahashi" << endl;
+        ans += n % 10;
+        n /= 10;
     }
+
+    cout << ans << endl;
 }

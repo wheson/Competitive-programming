@@ -40,12 +40,47 @@ LL change_div_mul_mod(LL divisor, LL mod_minus_2, LL mod){
     }
 }
 
-//#define int long long
+#define int long long
 
 /*************** using variables ***************/
-
+int n, k;
+vector<int> s;
+LL mul = 1;
+int ans = 0;
+int r = 0, l = 0;
 /**********************************************/
 
 signed main(){
+    cin >> n >> k;
+    s.resize(n);
+    REP(i, n){
+        cin >> s[i];
+    }
+    REP(i, n){
+        if(s[i] == 0){
+            cout << n << endl;
+            return 0;
+        }
+    }
+    
+    while(1){
+        if(n-1 - l < ans) break;
+        while(1){
+            if(mul <= k){
+                mul *= s[r];
+                r++;
+            }else{
+                break;
+            }
+        } 
+        ans = max(ans, r-l);
+        if(r > l){
+            mul /= s[l];
+            l++;
+        }else{
+            break;
+        }
+    }
 
+    cout << ans << endl;
 }

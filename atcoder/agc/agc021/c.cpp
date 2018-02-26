@@ -43,46 +43,18 @@ LL change_div_mul_mod(LL divisor, LL mod_minus_2, LL mod){
 //#define int long long
 
 /*************** using variables ***************/
-LL n;
-int depth = 0;
+int n, m, a, b;
 /**********************************************/
 
 signed main(){
-    cin >> n;
-    
-    LL nn = n;
-    while(nn > 0){
-        depth++;
-        nn /= 2;
+    cin >> n >> m >> a >> b;
+    int nn = n, mm = m;
+    if(m / 2 * n <= a){
+        cout << "NO" << endl;
+        return 0;
     }
     
-    if(depth % 2 == 1){
-        LL num = 1;
-        bool is_takahashi = true;
-        while(1){
-            if(is_takahashi == true){
-                num = num * 2 + 1;
-            }else{
-                num = num * 2;
-            }
-            if(num > n) break;
-            is_takahashi = !is_takahashi;
-        }
-        if(is_takahashi) cout << "Aoki" << endl;
-        else cout << "Takahashi" << endl;
-    }else{
-        LL num = 1;
-        bool is_takahashi = true;
-        while(1){
-            if(is_takahashi == true){
-                num = num * 2;
-            }else{
-                num = num * 2 + 1;
-            }
-            if(num > n) break;
-            is_takahashi = !is_takahashi;
-        }
-        if(is_takahashi) cout << "Aoki" << endl;
-        else cout << "Takahashi" << endl;
-    }
+    nn -= a / n;
+    if(m % 2)
+
 }
