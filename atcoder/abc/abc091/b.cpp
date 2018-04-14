@@ -11,19 +11,23 @@
 #include <deque>
 #include <cstdio>
 #include <bitset>
-#include <climits>
+#include <limits.h>
 #define REP(i, n) for(LL i = 0;i < n;i++)
 #define REPR(i, n) for(LL i = n;i >= 0;i--)
 #define FOR(i, m, n) for(LL i = m;i < n;i++)
 #define FORR(i, m, n) for(LL i = m;i >= n;i--)
+#define SORT(v, n) sort(v, v+n);
+#define VSORT(v) sort(v.begin(), v.end());
 #define pb(a) push_back(a)
 #define all(x) (x).begin(),(x).end()
-#define INF (int)1e9
-#define INFL (LL)1e11
+#define INF (LL)1e15
 #define MOD 1000000007
 using namespace std;
 typedef long long LL;
 typedef pair<int, int> P;
+typedef pair<LL, LL> LP;
+typedef pair<int, P> PP;
+typedef pair<LL, LP> LPP;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
@@ -31,40 +35,30 @@ int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
 int n, m;
-vector<int> a, b;
-int dist[11][11];
+map<string, int> mp;
+int ans = 0;
 /**********************************************/
 
 signed main(){
-    cin >> n >> m;
-    a.resize(m);
-    b.resize(m);
-    REP(i, m) cin >> a[i] >> b[i];
-    REP(i, 11){
-        REP(j, 11){
-            dist[i][j] = INF;
-        }
-    }
+    cin >> n;
+    REP(i, n){
+        string s;
+        cin >> s;
+        mp[s]++;
+    } 
+    cin >> m;
     REP(i, m){
-        dist[a[i]][b[i]] = 1;
-        dist[b[i]][a[i]] = 1;
-    }
-    
-    for(int k = 1; k <= n; k++){
-        for(int i = 1; i <= n; i++){
-            for(int j = 1; j <= n; j++){
-                if(i == j) dist[i][j] = INF;
-                else dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
-            }
-        }
+        string t;
+        cin >> t;
+        mp[t]--;
     }
 
-    for(int i = 1; i <= n; i++){
-        int ans = 0;
-        
-        for(int j = 1; j <= n; j++){
-            if(dist[i][j] == 2) ans++;
-        }
-        cout << ans << endl;
+    for(auto x: mp){
+        ans = max(x.second, ans);
     }
+
+    cout << ans << endl;
+
+    
+
 }

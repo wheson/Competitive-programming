@@ -20,30 +20,28 @@ int dx[]={1, -1, 0, 0, 0};
 //#define int long long
 
 /*************** using variables ***************/
-int w;
-int n, k;
-vector<int> a, b;
-int dp[51][51][10005];
+int n, d, x;
+vector<int> a;
 /**********************************************/
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
-
-    cin >> w >> n >> k;
-    a.resize(n);
-    b.resize(n);
-    REP(i, n) cin >> a[i] >> b[i];
     
+    cin >> n >> d >> x;
+    a.resize(n);
+    REP(i, n) cin >> a[i];
+
+    int ans = x;
     REP(i, n){
-        REP(j, k){
-            REP(m, w+1){
-                dp[i+1][j+1][m] = dp[i][j+1][m];
-                if(m >= a[i]) dp[i+1][j+1][m] = max(dp[i][j+1][m], dp[i][j][m-a[i]] + b[i]);
+        int cnt = 1;
+        REP(j, d){
+            if(j == 0) ans += 1;
+            else if(a[i] * cnt + 1 == j + 1){
+                ans += 1;
+                cnt++;
             }
         }
     }
-
-    cout << dp[n][k][w] << endl;
-
+    cout << ans << endl;
 }
