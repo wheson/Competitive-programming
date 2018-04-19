@@ -21,6 +21,7 @@ int dx[]={1, -1, 0, 0, 0};
 
 /*************** using variables ***************/
 int e;
+int m = INF;
 /**********************************************/
 
 signed main(){
@@ -28,11 +29,17 @@ signed main(){
     ios::sync_with_stdio(false);
 
     while(cin >> e, e){
-        for(int x = 0; x <= e; x++){
-            int ok = 0, ng = e - x + 1;
-            while(ok - ng >= 1){
-                if(ok)
+        m = INF;
+        for(int z = 0; z*z*z <= e; z++){
+            for(int y = 0; y*y <= e-z*z*z; y++){
+                int x = e - y*y - z*z*z;
+                if(x+y*y+z*z*z == e){
+                    //cout << x << " " << y << " " << z << endl;
+                    m = min(m, x+y+z);
+                }
             }
         }
+
+        cout << m << endl;
     }
 }
