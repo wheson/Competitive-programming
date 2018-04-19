@@ -3,3 +3,4 @@ tmp/
 .DS_Store
 making_algorithm/
 oit/
+*.txt
