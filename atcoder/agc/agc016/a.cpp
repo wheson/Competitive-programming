@@ -1,63 +1,49 @@
 #include <bits/stdc++.h>
-#define REP(i, n) for(int i = 0;i < n;i++)
-#define REPR(i, n) for(int i = n;i >= 0;i--)
-#define FOR(i, m, n) for(int i = m;i < n;i++)
-#define FORR(i, m, n) for(int i = m;i >= n;i--)
-#define SORT(v, n) sort(v, v+n);
-#define VSORT(v) sort(v.begin(), v.end());
-#define llong long long
-#define pb(a) push_back(a)
-#define INF 999999999
+
 using namespace std;
-typedef pair<int, int> P;
-typedef pair<llong, llong> LP;
-typedef pair<int, P> PP;
-typedef pair<llong, LP> LPP;
+using LL = long long;
+using P = pair<int, int>;
+using Tapris = tuple<int, int, int>;
+
+#define REP(i, n) for(LL i = 0; i < n; ++i)
+#define FOR(i, a, n) for(LL i = a; i < n; ++i)
+#define pb(a) push_back(a)
+#define all(x) (x).begin(),(x).end()
+
+const int INF = (int)1e9;
+const LL INFL = (LL)1e15;
+const int MOD = 1e9 + 7;
 
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
-int main(){
-	string s;
-	cin >> s;
-	int abc[26] = {0};
-	int nagasa = s.size();
-	int cnt;	
-	int min = 101;
-	REP(i, 26){
-		string ss = s;
-		char c = 'a' + i;
-		int naga = nagasa;
-		bool flag = false;
-		cnt = 0;
-		if(ss.size() == 0) break;
-		REPR(i, ss.size()){
-			if(flag == true){
-				break;
-			}
-			REP(i, ss.size() - 1){
-				if(ss[i] != c && ss[i+1] == c){
-					ss[i] = c;
-				}
-			}
-			ss.erase(ss.end() - 1);
-			REP(i, ss.size()){
-				if(ss[i] != c){
-					flag = false;
-					break;
-				}
-				flag = true;
-				
-			}
-			if(ss.find(c) == -1) break;
-			++cnt;
-		}
-		if(flag == true){
-			if(min > cnt){
-				min = cnt;
-			}
-		}
-	}
+//#define int long long
 
-	cout << min << endl;
+/*************** using variables ***************/
+string s;
+/**********************************************/
+
+signed main(){
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    cin >> s;
+
+    int min_range = INF;
+    REP(i, s.size()){
+        int cnt = 0;
+        int max_cnt = 0;
+        string ss = s + s[i];
+        REP(j, ss.size()){
+            if(ss[j] == s[i]){
+                max_cnt = max(max_cnt, cnt);
+                cnt = 0;
+            }else{
+                cnt++;
+            }
+        }
+        min_range = min(min_range, max_cnt);
+    }
+    cout << min_range << endl;
+
 }

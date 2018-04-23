@@ -20,23 +20,16 @@ int dx[]={1, -1, 0, 0, 0};
 //#define int long long
 
 /*************** using variables ***************/
-string s;
-int ans = 0;
+int h, w;
+string s[30][30];
 /**********************************************/
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    cin >> s;
-    int t_num = 0, s_num = 0;
-    REP(i, s.size()){
-        if(s[i] == 'T'){
-            if(s_num > 0) s_num--;
-            else t_num++;
-        }else{
-            s_num++;
-        }
-    }
-    cout << s_num + t_num << endl;
+    cin >> h >> w;
+    REP(i, h) REP(j, w) cin >> s[i][j];
+
+    REP(i, h) REP(j, w) if(s[i][j] == "snuke") cout << (char)('A'+j) << i+1 << endl;
 }
