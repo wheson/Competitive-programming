@@ -1,4 +1,5 @@
-a.out
+*.out
+*.in
 tmp/
 .DS_Store
 making_algorithm/
