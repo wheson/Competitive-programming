@@ -29,42 +29,28 @@ signed main(){
     ios::sync_with_stdio(false);
 
     cin >> n >> k >> s;
-    const string org = s;
-    
-    for(int len = (int)org.size(); len >= 0; len--){
-        string f = org;
-        sort(all(f));
-        
-        map<char, int> mp1, mp2;
-        for(int i = len; i < (int)org.size(); i++){
-            mp1[org[i]]++; mp2[f[i]]++;
-        }
-        int cnt = 0;
-        REP(i, len) if(org[i] != f[i]) cnt++;
-        int nnn = 0;
+    string ans = "";
+    map<char, int> mp;
+    REP(i, n) mp[s[i]]++;
+
+    REP(i, n){
         for(char c = 'a'; c <= 'z'; c++){
-            nnn += abs(mp1[c] - mp2[c]);
-        }
-        cnt += nnn/2;
-        if(cnt <= k){
-            REP(i, org.size()){
-                if(i < len) cout << f[i];
-                else if(mp2[org[i]] >= 1){
-                    cout << org[i];
-                    mp2[org[i]]--;
-                    mp1[org[i]]--;
-                }else{
-                    for(char c = 'a'; c <= 'z'; c++){
-                        if(mp2[c] - mp1[c] >= 1){
-                            cout << c;
-                            mp2[c]--;
-                            break;
-                        }
-                    }
-                }
+            if(mp[c] == 0) continue;
+            if(s[i] == c){
+                mp[c]--; ans += c; break;
             }
-            cout << endl;
-            return 0;
+            mp[c]--;
+            k--;
+            bool flag = true;
+            int cnt = 0;
+            int d[26] = {};
+            FOR(j, i+1, n) d[s[j] - 'a']++;
+            REP(j, 26) cnt += min(d[j], mp['a'+j]);
+            if(n - 1 - i - cnt > k) flag = false;
+            if(flag) {ans += c; break;}
+            mp[c]++;
+            k++;
         }
     }
+    cout << ans << endl;
 }
