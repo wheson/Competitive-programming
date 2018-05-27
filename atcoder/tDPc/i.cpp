@@ -46,11 +46,13 @@ signed main(){
             if(r >= n) break;
             
             // 2つの消せる区間がある時，その両方をつなげた区間はすべて消せるのでtrue
+            // true true
             for(int c = l+3; c < r; c += 3){
                 if(dp[l][c-1] && dp[c][r]) dp[l][r] = true;
             }
             
             // 両端に'i', 間に'w'があり，'i'と'w'の間の区間が両方ともtrueの時，iwiが繋がるのでtrue
+            // i true w true i
             FOR(c, l+1, r){
                 if(s[l] == 'i' && s[c] == 'w' && s[r] == 'i'){
                     if(l + 1 != c && !dp[l+1][c-1]) continue;
@@ -59,8 +61,7 @@ signed main(){
                 }
             }
         }
-    }
-    
+    } 
     // dp2[n]:= 区間[0, n]で消せる数の総和
     FOR(r, 1, n){
         dp2[r] = dp2[r-1];
