@@ -27,51 +27,12 @@ signed main(){
     ios::sync_with_stdio(false);
 
     cin >> s;
-    /* ooxoo
-       xxooo
-       
-       xxoxx
-       oooxx
-       xxoooooxx
-       ooxxxxxxx
-
-       xoxxxxxoo
-       xoooooooo
-
-       x
-    */
-
-    int renzoku = 0, cnt = 1;
-    bool flag = s[0] == '1';
-    char pre = s[0];
-    FOR(i, 1, s.size()){
-        if(pre == s[i]){
-            cnt++;
-        }else if(flag){
-            flag = false;
-            cnt++;
-        }else{
-            renzoku = max(renzoku, cnt);
-            cnt = 1;
-        }
-        pre = s[i];
-    }
+    int n = s.size();
     
-    flag = s[s.size()-1] == '1';
-    pre = s[s.size()-1];
-    cnt = 1;
-    for(int i = s.size()-2; i >= 0; i--){
-        if(pre == s[i]){
-            cnt++;
-        }else if(flag){
-            flag = false;
-            cnt++;
-        }else{
-            renzoku = max(renzoku, cnt);
-            cnt = 1;
-        }
-        pre = s[i];
+    int ans = n;
+    REP(i, n-1){
+        if(s[i] != s[i+1]) ans = min(ans, max(i+1, n-i-1));
     }
 
-    cout << renzoku << endl;
+    cout << ans << endl;
 }
