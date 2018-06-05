@@ -18,15 +18,11 @@ const int MOD = 1e9 + 7;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
-/*************** using variables **************/
 int a, b;
-/**********************************************/
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
-    
     cin >> a >> b;
-    cout << max(max(a+b, a-b), a*b) << endl;
-
+    cout << max({a+b, a-b, a*b}) << endl;
 }
