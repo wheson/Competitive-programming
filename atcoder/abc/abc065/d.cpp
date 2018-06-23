@@ -4,7 +4,7 @@
 using namespace std;
 using LL = long long;
 using P = pair<int, int>;
-
+using TP = tuple<int, int, int>;
 #define FOR(i, a, n) for(int i = (int)(a); i < (int)(n); ++i)
 #define REP(i, n) FOR(i, 0, n)
 
@@ -119,17 +119,26 @@ AdjList<T> Kruskal<T>::GetMinimumSpanningTree() {
     return minimumSpanningTree;
 }
 
-/*************** using variables **************/
-int n;
-/**********************************************/
-
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
     
+    int n;
     cin >> n;
-    Kruskal<int> krus(n);
-    REP(i, n){
-        
+    vector<TP> p(n);
+    Kruskal<int> pri(n);
+    REP(i, n) {
+        int x, y;
+        cin >> x >> y;
+        p[i] = make_tuple(x, y, i);
     }
+    
+    sort(all(p), [](TP a, TP b){return get<0>(a) < get<0>(b);});
+    REP(i, n-1) pri.AddEdge(get<2>(p[i]), get<2>(p[i+1]), get<0>(p[i+1]) - get<0>(p[i]));
+
+    sort(all(p), [](TP a, TP b){return get<1>(a) < get<1>(b);});
+    REP(i, n-1) pri.AddEdge(get<2>(p[i]), get<2>(p[i+1]), get<1>(p[i+1]) - get<1>(p[i]));
+
+    cout << pri.Run() << endl;
+
 }

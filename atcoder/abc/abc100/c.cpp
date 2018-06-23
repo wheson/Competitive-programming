@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define int long long
+//#define int long long
 
 using namespace std;
 using LL = long long;
@@ -18,18 +18,23 @@ const int MOD = 1e9 + 7;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
+int n;
+
+
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
     
-    int n, a, b;
-    cin >> n >> a >> b;
-    vector<int> x(n);
-    REP(i, n) cin >> x[i];
-    int ans = 0;
-    REP(i, n-1){
-        ans += min(a * (x[i+1]-x[i]), b);
-    }
+    cin >> n;
+    vector<int> a(n);
+    REP(i, n) cin >> a[i];
 
+    int ans = 0;
+    REP(i, n){
+        while(a[i] % 2 == 0){
+            ans++;
+            a[i] /= 2;
+        }
+    }
     cout << ans << endl;
 }

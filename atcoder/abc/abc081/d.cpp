@@ -29,4 +29,18 @@ signed main(){
     cin >> n;
     vector<int> a(n);
     REP(i, n) cin >> a[i];
+    int p_i = 0, m_i = 0;
+    REP(i, n) if(a[p_i] < a[i]) p_i = i;
+    REP(i, n) if(a[m_i] > a[i]) m_i = i;
+    
+    cout << n*2-1 << endl;
+    if(abs(a[p_i]) >= abs(a[m_i])){
+        REP(i, n) if(i != p_i) cout << p_i+1 << " " << i+1 << endl;
+        cout << p_i+1 << " " << p_i+1 << endl;
+        REP(i, n-1) cout << i+1 << " " << i+2 << endl;
+    }else{
+        REP(i, n) if(i != m_i) cout << m_i+1 << " " << i+1 << endl;
+        cout << m_i+1 << " " << m_i+1 << endl;
+        REP(i, n-1) cout << n-i << " " << n-i-1 << endl;
+    }
 }
