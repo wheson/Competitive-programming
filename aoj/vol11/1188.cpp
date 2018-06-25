@@ -18,21 +18,50 @@ const int MOD = 1e9 + 7;
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
+typedef string::const_iterator State;
+class ParseError {
+    public:
+        static void inputError(void){
+            cerr << "error!" << endl;
+            exit(1);
+        }
+};
 
+int number(State &begin){
+    int ret = 0;
+    while(isdigit(*begin)){
+        ret *= 10;
+        ret += *begin - '0';
+        begin++;
+    }
+    return ret;
+}
+
+int calc(State &begin){
+    if(*begin != '['){
+        ParseError::inputError();
+    }
+    if(*(++begin) != '[') return (number(begin)/2 + 1);
+    vector<int> a;
+    while(*begin == '['){
+        a.pb(calc(begin));
+        begin++;
+    }
+    sort(all(a));
+    int ans = 0;
+    REP(i, a.size()/2+1) ans += a[i];
+    return ans;
+}
 
 signed main(){
-    cin.tie(0);
-    ios::sync_with_stdio(false);
     int n;
     cin >> n;
     REP(i, n){
         string s;
         cin >> s;
-        int kaisou = 0;
-        REP(i, s.size()) if(s[i] != '[') kaisou++ else break;
-        REP(i, s.size()){
-            
-            
-        }
+
+        State begin = s.begin();
+        int ans = calc(begin);
+        cout << ans << endl;
     }
 }
