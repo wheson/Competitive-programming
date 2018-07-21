@@ -19,14 +19,11 @@ signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    LL a, b;
-    cin >> a >> b;
-
-    if(a * b <= 0){
-        cout << "Zero" << endl;
-    }else if(a > 0){
-        cout << "Positive" << endl;
-    }else if(a < 0){
-        cout << (abs(a - b + 1) & 1 ? "Negative" : "Positive") << endl;
-    }
+    string s;
+    cin >> s;
+    string y = "yahoo";
+    map<char, int> mp1, mp2;
+    REP(i, s.size()) mp1[s[i]]++, mp2[y[i]]++;
+    REP(i, y.size()) if(mp1[y[i]] != mp2[y[i]]){cout << "NO" << endl; return 0;}
+    cout << "YES" << endl;
 }

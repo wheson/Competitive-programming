@@ -12,21 +12,24 @@ using P = pair<int, int>;
 #define all(x) (x).begin(),(x).end()
 
 const int INF = (int)1e9;
-const LL INFL = (LL)1e15;
+const LL INFL = (LL)1e18;
 const int MOD = 1e9 + 7;
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    LL a, b;
-    cin >> a >> b;
+    int k, t;
+    cin >> k >> t;
+    vector<int> a(t);
+    REP(i, t) cin >> a[i];
 
-    if(a * b <= 0){
-        cout << "Zero" << endl;
-    }else if(a > 0){
-        cout << "Positive" << endl;
-    }else if(a < 0){
-        cout << (abs(a - b + 1) & 1 ? "Negative" : "Positive") << endl;
+    sort(all(a));
+    int l = 0, r = t-1;
+    for(; l < r;){
+        a[r]--; a[l]--;
+        if(a[r] == 0) r--;
+        if(a[l] == 0) l++;
     }
+    cout << max(a[l] - 1, 0) << endl;
 }

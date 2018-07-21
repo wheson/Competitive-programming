@@ -19,20 +19,21 @@ signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    string s;
-    cin >> s;
-    string org = s;
-    int n = s.size();
-    REP(i, n-1){
-        string rs = s;
-        reverse(all(rs));
-        if(s == rs){
-            cout << i << endl;
-            return 0;
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    REP(i, n) cin >> a[i];
+
+    int dp[15][2];
+    dp[0][0] = 1, dp[0][1] = 0;
+    REP(i, n){
+        if(a[i] & 1){
+            dp[i+1][0] = dp[i][0];
+            dp[i+1][1] = dp[i][0] * 2 + dp[i][1] * 3;
+        }else{
+            dp[i+1][0] = dp[i][0] * 2;
+            dp[i+1][1] = dp[i][1] * 3 + dp[i][0] * 1;
         }
-        string adds = org.substr(0, i+1);
-        reverse(all(adds));
-        s = org + adds;
     }
-    cout << n-1 << endl;
+    cout << dp[n][1] << endl;
 }

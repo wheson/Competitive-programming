@@ -15,18 +15,17 @@ const int INF = (int)1e9;
 const LL INFL = (LL)1e15;
 const int MOD = 1e9 + 7;
 
+int dy[]={0, 0, 1, -1, 0};
+int dx[]={1, -1, 0, 0, 0};
+
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    LL a, b;
-    cin >> a >> b;
+    string s;
+    cin >> s;
 
-    if(a * b <= 0){
-        cout << "Zero" << endl;
-    }else if(a > 0){
-        cout << "Positive" << endl;
-    }else if(a < 0){
-        cout << (abs(a - b + 1) & 1 ? "Negative" : "Positive") << endl;
-    }
+    int sum = 0;
+    REP(i, s.size()) if(s[i] == '1') sum++;
+    cout << sum << endl;
 }

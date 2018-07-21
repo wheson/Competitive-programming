@@ -1,98 +1,92 @@
-#include <iostream>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <map>
-#include <algorithm>
-#include <tuple>
-#include <set>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <cstdio>
-#include <numeric>
-#define REP(i, n) for(LL i = 0;i < n;i++)
-#define REPR(i, n) for(LL i = n;i >= 0;i--)
-#define FOR(i, m, n) for(LL i = m;i < n;i++)
-#define FORR(i, m, n) for(LL i = m;i >= n;i--)
-#define SORT(v, n) sort(v, v+n);
-#define VSORT(v) sort(v.begin(), v.end());
+#include <bits/stdc++.h>
+//#define int long long
+
+using namespace std;
+using LL = long long;
+using P = pair<int, int>;
+
+#define FOR(i, a, n) for(int i = (int)(a); i < (int)(n); ++i)
+#define REP(i, n) FOR(i, 0, n)
+
 #define pb(a) push_back(a)
 #define all(x) (x).begin(),(x).end()
-#define INF (LL)1e15
-#define MOD 1000000007
-using namespace std;
-typedef long long LL;
-typedef pair<int, int> P;
-typedef pair<LL, LL> LP;
-typedef pair<int, P> PP;
-typedef pair<LL, LP> LPP;
+
+const int INF = (int)1e9;
+const LL INFL = (LL)1e15;
+const int MOD = 1e9 + 7;
+
 int dy[]={0, 0, 1, -1, 0};
 int dx[]={1, -1, 0, 0, 0};
 
-/*************** using variables ***************/
-int n, p;
-int a[55];
-LL ans = 0;
-LL even_num = 0, odd_num = 0;
-/**********************************************/
+class Countings{
+    private:
+        int mod;
+        vector<long long> factList, invList;
+        long long Pow(long long x, long long n);
+    public:
+        Countings(int sz, int mod);
+        long long Permutation(int n, int r);
+        long long Combination(int n, int r);
+        long long HomogeneousProduct(int n, int r);
+};
 
-LL combination(LL n, LL r){
-    LL ret = 1;
-    int m = r;
-    FORR(i, n, n-r+1){
-        ret *= i;
-        if(m >= 1 && ret % m == 0){
-            ret /= m;
-            m--;
-        }
+Countings::Countings(int sz, int mod) : mod(mod), factList(sz + 1), invList(sz + 1) {
+    factList[0] = 1;
+    for(int i = 1; i < factList.size(); i++) {
+        factList[i] = factList[i - 1] * i % mod;
     }
-    FORR(i, m, 1){
-        ret /= i;
+    invList[sz] = Pow(factList[sz], mod - 2);
+    for(int i = sz - 1; i >= 0; i--) {
+        invList[i] = invList[i + 1] * (i + 1) % mod;
+    }
+}
+
+long long Countings::Pow(long long x, long long n){
+    long long ret = 1;
+    while(n > 0) {
+      if(n & 1) ret = ret * x % mod;
+      x = x * x % mod;
+      n >>= 1;
     }
     return ret;
 }
 
-int main(){
+long long Countings::Permutation(int n, int r){
+    if(r < 0 || n < r) return 0;
+    return factList[n] * invList[n - r] % mod;
+}
+
+long long Countings::Combination(int n, int r){
+    if(r < 0 || n < r) return 0;
+    return factList[n] * invList[r] % mod * invList[n - r] % mod;
+}
+
+long long Countings::HomogeneousProduct(int n, int r){
+    if(n < 0 || r < 0) return 0;
+    return (r == 0 ? 1 : Combination(n + r - 1, r));
+}
+
+signed main(){
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    int n, p;
     cin >> n >> p;
-    REP(i, n){
-        int x;
-        cin >> x;
-        if(x % 2 == 0){ 
-            a[i] = 0;
-            even_num++;
+    vector<int> a(n);
+    REP(i, n) cin >> a[i];
+
+    int cnt = 0;
+    REP(i, n) if(a[i] % 2 == 0) cnt++;
+    
+    LL sum = pow(2LL, cnt);
+    LL ans = 0;
+    Countings countings(n, MOD);
+    REP(i, n-cnt+1){
+        if(p == 0){
+            if(i % 2 == 0) ans += sum * countings.Combination(n-cnt, i);
         }else{
-            a[i] = 1;
-            odd_num++;
+            if(i % 2 == 1) ans += sum * countings.Combination(n-cnt, i);
         }
-    }
-    
-    LL even_cnt; 
-    if(even_num != 0) even_cnt = 2;
-    else even_cnt = 1;
-    FOR(i, 1, even_num){
-        even_cnt += combination(even_num, i);
-        cout << "even_cnt " << i << ": " << even_cnt << endl;
-        cout << "comb(even_num, " << i << "): " << combination(even_num, i) << endl;
-    }
-    
-    if(p == 0){
-        LL odd_cnt = 1;
-        FOR(i, 2, odd_num){
-            if(i % 2 == 0) odd_cnt += combination(odd_num, i);
-            cout << "odd_cnt " << i << ": " << odd_cnt << endl;
-            cout << "comb(odd_num, " << i << "): " << combination(odd_num, i) << endl;
-        }
-        cout << even_cnt << " " << odd_cnt << endl;
-        ans = even_cnt * odd_cnt;
-    }else{
-        LL odd_cnt = 0;
-        FOR(i, 1, odd_num){
-            if(i % 2 == 1) odd_cnt += combination(odd_num, i);
-            cout << "odd_num " << i << ": " << odd_cnt << endl;
-            cout << "comb(odd_num, " << i << "): " << combination(odd_num, i) << endl;
-        }
-        ans = even_cnt * odd_cnt;
     }
 
     cout << ans << endl;
