@@ -1,7 +1,5 @@
-*.out
-*.in
-tmp/
-.DS_Store
-making_algorithm/
-oit/
-*.txt
+*
+!atcoder/*.cpp
+!aoj/*.cpp
+!yukicoder/*.cpp
+!README.md

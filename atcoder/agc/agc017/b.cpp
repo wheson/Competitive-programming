@@ -12,31 +12,21 @@ using P = pair<int, int>;
 #define all(x) (x).begin(),(x).end()
 
 const int INF = (int)1e9;
-const LL INFL = (LL)1e15;
+const LL INFL = (LL)1e18;
 const int MOD = 1e9 + 7;
-
-int dy[]={0, 0, 1, -1, 0};
-int dx[]={1, -1, 0, 0, 0};
-
-/*************** using variables **************/
-int n, a, b, c, d;
-vector<int> arr;
-/**********************************************/
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
+    LL n, a, b, c, d;
     cin >> n >> a >> b >> c >> d;
-    arr.assign(n-1, 0);
-    arr[0] = a;
-    if(a < b){
-        if(n % 2){
-            REP(i, n-2){
-                arr[i+1] = arr[i] + 
-            }
-        }else{
-            
+
+    REP(i, n-1){
+        if(a + c * i - d * (n - 1 - i) <= b && a + d * i - c * (n - 1 - i) >= b){
+            cout << "YES" << endl;
+            return 0;
         }
     }
+    cout << "NO" << endl;
 }
