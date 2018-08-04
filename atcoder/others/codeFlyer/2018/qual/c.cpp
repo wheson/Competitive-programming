@@ -12,33 +12,20 @@ using P = pair<int, int>;
 #define all(x) (x).begin(),(x).end()
 
 const int INF = (int)1e9;
-const LL INFL = (LL)1e15;
+const LL INFL = (LL)1e18;
 const int MOD = 1e9 + 7;
-
-int dy[]={0, 0, 1, -1, 0};
-int dx[]={1, -1, 0, 0, 0};
-
-/*************** using variables **************/
-int n, d;
-/**********************************************/
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
+    int n, d;
     cin >> n >> d;
-    vector<int> x(n);
-    REP(i, n) cin >> x[i];
+    vector<int> a(n);
+    REP(i, n) cin >> a[i];
 
-    vector<int> ruiseki(n+1);
-    ruiseki[0] = 0;
-    REP(i, n) ruiseki[i+1] = ruiseki[i] + x[i];
+    int l = 0, m = 0, r = 1;
+    while(1){
 
-    REP(i, n){
-        auto itr1 = upper_bound(all(ruiseki), x[i]+d);
-        itr1--;
-        int fst = itr1 - ruiseki.begin() - 1;
-        
-        auto itr2 = upper_bound(all(ruiseki), x[fst]+d);
     }
 }

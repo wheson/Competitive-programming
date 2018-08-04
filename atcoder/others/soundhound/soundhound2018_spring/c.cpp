@@ -1,67 +1,90 @@
-#include <iostream>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <map>
-#include <algorithm>
-#include <tuple>
-#include <set>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <cstdio>
-#include <numeric>
-#define REP(i, n) for(LL i = 0;i < n;i++)
-#define REPR(i, n) for(LL i = n;i >= 0;i--)
-#define FOR(i, m, n) for(LL i = m;i < n;i++)
-#define FORR(i, m, n) for(LL i = m;i >= n;i--)
-#define SORT(v, n) sort(v, v+n);
-#define VSORT(v) sort(v.begin(), v.end());
+#include <bits/stdc++.h>
+//#define int long long
+
+using namespace std;
+using LL = long long;
+using P = pair<int, int>;
+
+#define FOR(i, a, n) for(int i = (int)(a); i < (int)(n); ++i)
+#define REP(i, n) FOR(i, 0, n)
+
 #define pb(a) push_back(a)
 #define all(x) (x).begin(),(x).end()
-#define INF (LL)1e15
-#define MOD 1000000007
-using namespace std;
-typedef long long LL;
-typedef pair<int, int> P;
-typedef pair<LL, LL> LP;
-typedef pair<int, P> PP;
-typedef pair<LL, LP> LPP;
-int dy[]={0, 0, 1, -1, 0};
-int dx[]={1, -1, 0, 0, 0};
 
-/*************** using variables ***************/
-int r, c;
-vector<string> C;
-int ans = 0;
-/**********************************************/
+const int INF = (int)1e9;
+const LL INFL = (LL)1e18;
+const int MOD = 1e9 + 7;
 
-int main(){
+class BipartiteMatching{
+    private:
+        int n; // 頂点数
+        vector<vector<int>> graph;
+        vector<int> match;
+        vector<int> used;
+        bool Dfs(int v);
+    public:
+        BipartiteMatching(int n);
+        void AddEdge(int u, int v);
+        int Run();
+        int Match(int u);
+};
+
+BipartiteMatching::BipartiteMatching(int n): 
+    n(n),
+    graph(n),
+    match(n),
+    used(n)
+{}
+
+void BipartiteMatching::AddEdge(int u, int v){
+    graph[u].push_back(v);
+}
+
+bool BipartiteMatching::Dfs(int v){
+    used[v] = true;
+    for(int u : graph[v]){
+        int w = match[u];
+        if(w == -1 || (!used[w] && Dfs(w))){
+            match[v] = u;
+            match[u] = v;
+            return true;
+        }
+    }
+    return false;
+}
+
+int BipartiteMatching::Run(){
+    int res = 0;
+    fill(begin(match), end(match), -1);
+    for(int v = 0; v < n; ++v){
+        if(match[v] == -1){
+            fill(begin(used), end(used), false);
+            if(Dfs(v)) res++;
+        }
+    }
+    return res;
+}
+
+signed main(){
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    int r, c;
     cin >> r >> c;
-    C.resize(r+5);
-    REP(i, r) cin >> C[i];
-    
-    int cnt = 0;
-    REP(i, r){
-        REP(j, c){
-            if(j % 2 == 1 && i % 2 == 0 && C[i][j] == '.'){
-                cnt++;
-            }else if(j % 2 == 0 && i % 2 == 1 && C[i][j] == '.'){
-                cnt++;
-            }
+    vector<string> s(r);
+    REP(i, r) cin >> s[i];
+
+    BipartiteMatching bm(r * c);
+    REP(i, r) REP(j, c) {
+        if(s[i][j] == '.'){
+            if(i > 0 && s[i-1][j] == '.') bm.AddEdge(i*c + j, (i-1)*c + j);
+            if(i < r-1 && s[i+1][j] == '.') bm.AddEdge(i*c + j, (i+1)*c + j);
+            if(j > 0 && s[i][j-1] == '.') bm.AddEdge(i*c + j, i*c + j-1);
+            if(j < c-1 && s[i][j+1] == '.') bm.AddEdge(i*c + j, i*c + j+1);
         }
     }
-    ans = cnt;
-    cnt = 0;
-    REP(i, r){
-        REP(j, c){
-            if(j % 2 == 1 && i % 2 == 1 && C[i][j] == '.'){
-                cnt++;
-            }else if(j % 2 == 0 && i % 2 == 0 && C[i][j] == '.'){
-                cnt++;
-            }
-        }
-    }
-    ans = max(cnt, ans);
+
+    int ans = -bm.Run();
+    REP(i, r) REP(j, c) if(s[i][j] == '.') ans++;
     cout << ans << endl;
 }
