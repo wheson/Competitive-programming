@@ -1,5 +1,4 @@
-*
-!atcoder/*.cpp
-!aoj/*.cpp
-!yukicoder/*.cpp
-!README.md
+ignore/*
+*.out
+*.txt
+*.in
