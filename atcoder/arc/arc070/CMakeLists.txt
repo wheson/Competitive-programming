@@ -1,0 +1,6 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(ARC070 CXX)
+add_executable(ARC070C c.cpp)
+add_executable(ARC070D d.cpp)
+add_executable(ARC070E e.cpp)
+add_executable(ARC070F f.cpp)
