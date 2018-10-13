@@ -1,6 +1,5 @@
 ignore/*
 *.out
-*.txt
 *.in
 cmake-build-debug
 .idea
