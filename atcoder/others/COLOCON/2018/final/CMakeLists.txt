@@ -1,0 +1,8 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(COLOCON2018_final CXX)
+add_executable(COLOCON2018_final_A a.cpp)
+add_executable(COLOCON2018_final_B b.cpp)
+add_executable(COLOCON2018_final_C c.cpp)
+add_executable(COLOCON2018_final_D d.cpp)
+add_executable(COLOCON2018_final_E e.cpp)
+add_executable(COLOCON2018_final_F f.cpp)

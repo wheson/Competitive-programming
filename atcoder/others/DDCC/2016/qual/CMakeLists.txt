@@ -1,0 +1,6 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(DDCC2016_qual CXX)
+add_executable(DDCC2016_qual_A a.cpp)
+add_executable(DDCC2016_qual_B b.cpp)
+add_executable(DDCC2016_qual_C c.cpp)
+add_executable(DDCC2016_qual_D d.cpp)
