@@ -1,0 +1,7 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(TENKA1_2016_QUALB CXX)
+add_executable(TENKA1_2016_QUALB_A a.cpp)
+add_executable(TENKA1_2016_QUALB_B b.cpp)
+add_executable(TENKA1_2016_QUALB_C c.cpp)
+add_executable(TENKA1_2016_QUALB_D d.cpp)
+add_executable(TENKA1_2016_QUALB_E e.cpp)

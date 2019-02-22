@@ -24,22 +24,22 @@ signed main(){
     vector<int> f(n);
     REP(i, n) cin >> f[i];
 
-    vector<LL> dp(n+1, 0);
-    dp[0] = 1;
-    int l = 0;
-    LL sum = 1LL;
-    map<int, bool> mp;
+    vector<LL> dp(n+1, 0), h(n, 0), g(n, 0), ruiseki(n+2, 0);
+    map<int, int> mp;
     REP(i, n){
-        while(mp[f[i]]){
-            if(l-1 >= 0) sum = (sum + MOD - dp[l-1]) % MOD;
-            cout << "f " << f[l] << endl;
-            mp[f[l]] = false;
-            l++;
-        }
-        mp[f[l]] = true;
-        dp[i+1] = sum;
-        sum = (sum + dp[i+1]) % MOD;
+        g[i] = mp[f[i]];
+        h[i] = max((i == 0 ? 0 : h[i-1]), g[i]);
+        mp[f[i]] = i+1;
     }
-    for(auto x : dp) cout << x << endl;
+
+    dp[0] = 1;
+    ruiseki[1] = dp[0];
+    REP(i, n){
+        dp[i+1] = (MOD + ruiseki[i+1] - ruiseki[h[i]]) % MOD;
+        (ruiseki[i+2] = dp[i+1] + ruiseki[i+1]) %= MOD;
+    }
+
+    //for(auto x : h) cout << x << endl;
+    //for(auto x : dp) cout << x << endl;
     cout << dp[n] << endl;
 }

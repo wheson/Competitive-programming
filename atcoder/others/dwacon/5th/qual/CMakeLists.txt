@@ -1,0 +1,6 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(DWACON5TH_QUAL CXX)
+add_executable(DWACON5TH_QUAL_A a.cpp)
+add_executable(DWACON5TH_QUAL_B b.cpp)
+add_executable(DWACON5TH_QUAL_C c.cpp)
+add_executable(DWACON5TH_QUAL_D d.cpp)

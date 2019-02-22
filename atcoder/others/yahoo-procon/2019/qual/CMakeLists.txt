@@ -1,0 +1,8 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(YAHOO_2019_QUAL CXX)
+add_executable(YAHOO_2019_QUAL_A a.cpp)
+add_executable(YAHOO_2019_QUAL_B b.cpp)
+add_executable(YAHOO_2019_QUAL_C c.cpp)
+add_executable(YAHOO_2019_QUAL_D d.cpp)
+add_executable(YAHOO_2019_QUAL_E e.cpp)
+add_executable(YAHOO_2019_QUAL_F f.cpp)

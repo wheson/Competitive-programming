@@ -1,34 +1,34 @@
-#include <iostream>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <map>
-#include <algorithm>
-#include <tuple>
-#include <set>
-#include <stack>
-#include <queue>
-#include <deque>
-#define REP(i, n) for(LL i = 0;i < n;i++)
-#define REPR(i, n) for(LL i = n;i >= 0;i--)
-#define FOR(i, m, n) for(LL i = m;i < n;i++)
-#define FORR(i, m, n) for(LL i = m;i >= n;i--)
-#define SORT(v, n) sort(v, v+n);
-#define VSORT(v) sort(v.begin(), v.end());
+#include <bits/stdc++.h>
+//#define int long long
+
+using namespace std;
+using LL = long long;
+using P = pair<int, int>;
+
+#define FOR(i, a, n) for(int i = (int)(a); i < (int)(n); ++i)
+#define REP(i, n) FOR(i, 0, n)
+
 #define pb(a) push_back(a)
 #define all(x) (x).begin(),(x).end()
-#define INF 999999999
-#define MOD 1000000007
-using namespace std;
-typedef long long LL;
-//typedef LL int;
-typedef pair<int, int> P;
-typedef pair<LL, LL> LP;
-typedef pair<int, P> PP;
-typedef pair<LL, LP> LPP;
-int dy[]={0, 0, 1, -1, 0};
-int dx[]={1, -1, 0, 0, 0};
 
-int main(){
-    string
+const int INF = (int)1e9;
+const LL INFL = (LL)1e18;
+const int MOD = (int)1e9 + 7;
+
+signed main(){
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    string s;
+    cin >> s;
+    const string oris = s;
+
+    cout << s << endl;
+    set<string> st;
+    st.insert(s);
+    REP(i, s.size()){
+        FOR(j, i+1, s.size()){
+            st.insert(s);
+        }
+    }
 }

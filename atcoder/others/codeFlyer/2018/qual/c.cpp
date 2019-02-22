@@ -13,7 +13,7 @@ using P = pair<int, int>;
 
 const int INF = (int)1e9;
 const LL INFL = (LL)1e18;
-const int MOD = 1e9 + 7;
+const int MOD = (int)1e9 + 7;
 
 signed main(){
     cin.tie(0);
@@ -21,11 +21,21 @@ signed main(){
 
     int n, d;
     cin >> n >> d;
-    vector<int> a(n);
-    REP(i, n) cin >> a[i];
+    vector<LL> x(n);
+    REP(i, n) cin >> x[i];
 
-    int l = 0, m = 0, r = 1;
-    while(1){
+    vector<LL> l(n), r(n);
+    int left = 0, right = 0;
+    REP(i, n){
+        while(right < n && x[right] - x[i] <= d) right++;
+        while(left < i && x[i] - x[left] > d) left++;
 
+        r[i] = right - 1;
+        l[i] = left;
     }
+
+    LL ans = 0;
+    REP(i, n) ans += (r[i] - i) * (i - l[i]);
+    REP(i, n) ans -= (r[i] - i) * (r[i] - i - 1) / 2;
+    cout << ans << endl;
 }

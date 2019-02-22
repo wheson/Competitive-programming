@@ -1,0 +1,6 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(CADDi2018_Beginner CXX)
+add_executable(CADDi2018_Beginner_A a.cpp)
+add_executable(CADDi2018_Beginner_B b.cpp)
+add_executable(CADDi2018_Beginner_C c.cpp)
+add_executable(CADDi2018_Beginner_D d.cpp)

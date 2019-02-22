@@ -1,0 +1,7 @@
+set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
+project(DDCC2019_FINAL CXX)
+add_executable(DDCC2019_FINAL_A a.cpp)
+add_executable(DDCC2019_FINAL_B b.cpp)
+add_executable(DDCC2019_FINAL_C c.cpp)
+add_executable(DDCC2019_FINAL_D d.cpp)
+add_executable(DDCC2019_FINAL_E e.cpp)

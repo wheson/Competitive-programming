@@ -21,5 +21,31 @@ signed main(){
 
     int n, m, p, q, r;
     cin >> n >> m >> p >> q >> r;
+    vector<int> x(r), y(r), z(r);
+    REP(i, r) cin >> x[i] >> y[i] >> z[i];
+    vector<vector<int>> happy(n, vector<int>(m, 0));
+    REP(i, r){
+        happy[x[i]-1][y[i]-1] = z[i];
+    }
 
+    int ans = 0;
+    for(int mask = 0; mask < (1 << n); mask++){
+        if(__builtin_popcount(mask) == p){
+            int sum = 0;
+            vector<int> man;
+            REP(i, m){
+                int msum = 0;
+                REP(j, n){
+                    if(mask & (1 << j)){
+                        msum += happy[j][i];
+                    }
+                }
+                man.pb(msum);
+            }
+            sort(all(man), greater<int>());
+            REP(i, q) sum += man[i];
+            ans = max(ans, sum);
+        }
+    }
+    cout << ans << endl;
 }
