@@ -1,8 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(AGC025 CXX)
-add_executable(AGC025A a.cpp)
-add_executable(AGC025B b.cpp)
-add_executable(AGC025C c.cpp)
-add_executable(AGC025D d.cpp)
-add_executable(AGC025E e.cpp)
-add_executable(AGC025F f.cpp)

@@ -22,10 +22,34 @@ signed main(){
     cin >> n >> k;
     vector<int> t(n), d(n);
     REP(i, n) cin >> t[i] >> d[i];
+    vector<pair<int, int>> p;
+    REP(i, n) p.pb(make_pair(d[i], t[i]));
+    sort(all(p), [](pair<int, int> a, pair<int, int> b){ return a.first > b.first; });
 
-    map<int, priority_queue<int>> sushi;
-    REP(i, n) sushi[t[i]].push(d[i]);
+    vector<LL> sushi1, sushi2(1, 0);
+    map<int, bool> close;
+    REP(i, n){
+        if(close[p[i].second]){
+            sushi2.pb(p[i].first);
+        }else{
+            sushi1.pb(p[i].first);
+            close[p[i].second] = true;
+        }
+    }
+    REP(i, sushi1.size() - 1){
+        sushi1[i+1] += sushi1[i];
+    }
+    REP(i, sushi2.size() - 1){
+        sushi2[i+1] += sushi2[i];
+    }
 
-    int num = min((int)sushi.size(), k);
+    LL ans = 0;
+    REP(i, min(k, (int)sushi1.size())){
+        if(sushi2.size() > k - i - 1){
+            ans = max(ans, 1LL * (i+1) * (i+1) + sushi1[i] + sushi2[k - i - 1]);
+            //cout << i+1 << " " << 1LL * (i+1) * (i+1) + sushi1[i] + sushi2[k - i - 1] << " " << sushi1[i] << " " << sushi2[k - i - 1] << endl;
+        }
+    }
+    cout << ans << endl;
 
 }

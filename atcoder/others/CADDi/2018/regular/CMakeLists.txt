@@ -1,6 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(CADDi2018 CXX)
-add_executable(CADDi2018_C c.cpp)
-add_executable(CADDi2018_D d.cpp)
-add_executable(CADDi2018_E e.cpp)
-add_executable(CADDi2018_F f.cpp)

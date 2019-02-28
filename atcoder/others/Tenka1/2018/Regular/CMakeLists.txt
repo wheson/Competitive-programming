@@ -1,6 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(TENKA1_2018_REGULAR CXX)
-add_executable(TENKA1_2018_REGULAR_C c.cpp)
-add_executable(TENKA1_2018_REGULAR_D d.cpp)
-add_executable(TENKA1_2018_REGULAR_E e.cpp)
-add_executable(TENKA1_2018_REGULAR_F f.cpp)

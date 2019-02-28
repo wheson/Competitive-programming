@@ -1,6 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(DWACON_4TH_FINAL CXX)
-add_executable(DWACON_4TH_FINAL_A a.cpp)
-add_executable(DWACON_4TH_FINAL_B b.cpp)
-add_executable(DWACON_4TH_FINAL_C c.cpp)
-add_executable(DWACON_4TH_FINAL_D d.cpp)

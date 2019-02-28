@@ -1,6 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(DDCC2019_QUAL CXX)
-add_executable(DDCC2019_QUAL_A a.cpp)
-add_executable(DDCC2019_QUAL_B b.cpp)
-add_executable(DDCC2019_QUAL_C c.cpp)
-add_executable(DDCC2019_QUAL_D d.cpp)

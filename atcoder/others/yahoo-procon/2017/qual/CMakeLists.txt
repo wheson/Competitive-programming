@@ -1,7 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(YAHOO_PROCON_2017_QUAL CXX)
-add_executable(YAHOO_PROCON_2017_QUAL_A a.cpp)
-add_executable(YAHOO_PROCON_2017_QUAL_B b.cpp)
-add_executable(YAHOO_PROCON_2017_QUAL_C c.cpp)
-add_executable(YAHOO_PROCON_2017_QUAL_D d.cpp)
-add_executable(YAHOO_PROCON_2017_QUAL_E e.cpp)

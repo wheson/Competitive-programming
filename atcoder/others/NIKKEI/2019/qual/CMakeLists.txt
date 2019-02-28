@@ -1,8 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(NIKKEI2019_qual CXX)
-add_executable(NIKKEI2019_qual_A a.cpp)
-add_executable(NIKKEI2019_qual_B b.cpp)
-add_executable(NIKKEI2019_qual_C c.cpp)
-add_executable(NIKKEI2019_qual_D d.cpp)
-add_executable(NIKKEI2019_qual_E e.cpp)
-add_executable(NIKKEI2019_qual_F f.cpp)

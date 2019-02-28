@@ -1,6 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(ABC103 CXX)
-add_executable(ABC103A a.cpp)
-add_executable(ABC103B b.cpp)
-add_executable(ABC103C c.cpp)
-add_executable(ABC103D d.cpp)

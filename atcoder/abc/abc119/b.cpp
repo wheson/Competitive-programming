@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define int long long
+//#define int long long
 
 using namespace std;
 using LL = long long;
@@ -18,19 +18,15 @@ signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    string s;
-    cin >> s;
-    map<char, int> mp;
-    REP(i, s.size()){
-        mp[s[i]]++;
-    }
+    int n;
+    cin >> n;
+    vector<double> x(n);
+    vector<string> u(n);
+    REP(i, n) cin >> x[i] >> u[i];
 
-    int sum = 0;
-    int sum1 = 0;
-    for(auto x : mp){
-        sum += x.second - x.second % 2;
-        sum1 += x.second % 2;
+    double ans = 0;
+    REP(i, n){
+        ans += (u[i] == "JPY" ? x[i] : x[i] * 380000);
     }
-
-    cout << (sum + (sum1 == 0 ? 0 : 1)) * (sum + (sum1 == 0 ? 0 : 1)) + max(0LL, sum1 - 1) << endl;
+    printf("%.9f\n", ans);
 }

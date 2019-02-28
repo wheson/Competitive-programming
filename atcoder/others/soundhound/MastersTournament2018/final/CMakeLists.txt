@@ -1,6 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(SOUNDHOUND_MASTERS2018 CXX)
-add_executable(SOUNDHOUND_MASTERS2018_A a.cpp)
-add_executable(SOUNDHOUND_MASTERS2018_B b.cpp)
-add_executable(SOUNDHOUND_MASTERS2018_C c.cpp)
-add_executable(SOUNDHOUND_MASTERS2018_D d.cpp)

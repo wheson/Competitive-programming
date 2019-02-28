@@ -1,8 +1,0 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -O2")
-project(CODEFESTIVAL2017_qualA CXX)
-add_executable(CODEFESTIVAL2017_qualA_A a.cpp)
-add_executable(CODEFESTIVAL2017_qualA_B b.cpp)
-add_executable(CODEFESTIVAL2017_qualA_C c.cpp)
-add_executable(CODEFESTIVAL2017_qualA_D d.cpp)
-add_executable(CODEFESTIVAL2017_qualA_E e.cpp)
-add_executable(CODEFESTIVAL2017_qualA_F f.cpp)

@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define int long long
+//#define int long long
 
 using namespace std;
 using LL = long long;
@@ -20,17 +20,20 @@ signed main(){
 
     string s;
     cin >> s;
-    map<char, int> mp;
-    REP(i, s.size()){
-        mp[s[i]]++;
-    }
 
-    int sum = 0;
-    int sum1 = 0;
-    for(auto x : mp){
-        sum += x.second - x.second % 2;
-        sum1 += x.second % 2;
+    if(s[5] == '1') {
+        cout << "TBD" << endl;
+        return 0;
     }
-
-    cout << (sum + (sum1 == 0 ? 0 : 1)) * (sum + (sum1 == 0 ? 0 : 1)) + max(0LL, sum1 - 1) << endl;
+    
+    if(s[6] - '0' >= 5){
+        cout << "TBD" << endl;
+        return 0;
+    }
+    
+    if(s[6] - '0' <= 4){
+        cout << "Heisei" << endl;
+        return 0;
+    }
+    
 }
