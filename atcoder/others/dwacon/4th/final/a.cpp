@@ -22,9 +22,23 @@ signed main(){
     int h, m, s, c1, c2;
     cin >> h >> m >> s >> c1 >> c2;
 
-    // s1 := 1回目に秒針が分針を跨ぐ秒数
-    int s1 = (m >= s ? m - s + 1 : 60 - s + m + 1);
+    int st = h * 3600 + m * 60 + s;
+    int cur = st;
+    int cnt1 = 0, cnt2 = 0;
+    int mintime = INF, maxtime = -1;
+    while(cur++, cnt1 <= c1 && cnt2 <= c2){
+        if((cur - 1) % 60 * 60 < (cur - 1) % 3600 && cur % 60 * 60 >= cur % 3600) cnt1++;
 
-    // m1 := 1回目に分針が時針を跨ぐ秒数
-    int m1 = 60 * ()
+        if((cur - 1) % 3600 * 12 < (cur - 1) % (3600*12) && cur % 3600 * 12 >= cur % (3600*12)) cnt2++;
+
+        if(cur%60*60 == cur%3600 || cur%3600*12 == cur%(3600*12)) continue;
+
+        if(cnt1 == c1 && cnt2 == c2){
+            mintime = min(mintime, cur);
+            maxtime = max(maxtime, cur);
+        }
+    }
+
+    if(mintime == INF) cout << -1 << endl;
+    else cout << mintime - st << " " << maxtime - st << endl;
 }
