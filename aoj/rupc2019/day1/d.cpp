@@ -12,23 +12,19 @@ using P = pair<int, int>;
 #define all(x) (x).begin(),(x).end()
 
 const int INF = (int)1e9;
-const LL INFL = (LL)1e18;
-const int MOD = (int)1e9 + 7;
+const LL INFL = (LL)1e19;
+const int MOD = 1e9 + 7;
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    string s;
-    cin >> s;
-    
-    map<char, int> mp;
-    REP(i, s.size())  mp[s[i]]++;
+    int n, k, m;
+    cin >> n >> k >> m;
+    REP(i, k){
+        vector<int> a(m), b(m);
+        REP(i, m) cin >> a[i] >> b[i];
 
-    LL ans = 1;
-    REP(i, s.size()){
-        ans += s.size() - i - mp[s[i]];
-        mp[s[i]]--;
+        
     }
-    cout << ans << endl;
 }

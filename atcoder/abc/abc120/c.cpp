@@ -13,7 +13,7 @@ using P = pair<int, int>;
 
 const int INF = (int)1e9;
 const LL INFL = (LL)1e18;
-const int MOD = (int)1e9 + 7;
+const int MOD = 1e9 + 7;
 
 signed main(){
     cin.tie(0);
@@ -21,14 +21,19 @@ signed main(){
 
     string s;
     cin >> s;
-    
-    map<char, int> mp;
-    REP(i, s.size())  mp[s[i]]++;
 
-    LL ans = 1;
+    stack<char> st;
+    int ans = 0;
     REP(i, s.size()){
-        ans += s.size() - i - mp[s[i]];
-        mp[s[i]]--;
+        if(s[i] == '0' && !st.empty() && st.top() == '1'){
+            ans += 2;
+            st.pop();
+        }else if(s[i] == '1' && !st.empty() && st.top() == '0'){
+            ans += 2;
+            st.pop();
+        }else{
+            st.push(s[i]);
+        }
     }
     cout << ans << endl;
 }

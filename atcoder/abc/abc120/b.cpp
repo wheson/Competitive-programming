@@ -13,22 +13,17 @@ using P = pair<int, int>;
 
 const int INF = (int)1e9;
 const LL INFL = (LL)1e18;
-const int MOD = (int)1e9 + 7;
+const int MOD = 1e9 + 7;
 
 signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    string s;
-    cin >> s;
-    
-    map<char, int> mp;
-    REP(i, s.size())  mp[s[i]]++;
+    int a, b, k;
+    cin >> a >> b >> k;
 
-    LL ans = 1;
-    REP(i, s.size()){
-        ans += s.size() - i - mp[s[i]];
-        mp[s[i]]--;
-    }
-    cout << ans << endl;
+    vector<int> ans;
+    REP(i, 100) if(a % (i+1) == 0 && b % (i+1) == 0) ans.pb(i+1);
+    cout << ans[ans.size() - k] << endl;
+
 }

@@ -20,29 +20,18 @@ signed main(){
 
     int k;
     cin >> k;
-    vector<int> a(k), b(k);
+    vector<LL> a(k);
     REP(i, k) cin >> a[i];
 
-    if(a[k-1] != 2){
-        cout << -1 << endl;
-        return 0;
-    }
-
     LL ans1 = 2, ans2 = 2;
-    b[k-1] = 2;
-    for(int i = k-2; i >= 0; i--){
-        if(a[i] > ans1 + a[i+1]-1) {
+    for(int i = k-1; i >= 0 ; i--){
+        if(ans1 % a[i] != 0 && ans1 + a[i] - (ans1 % a[i]) > ans2){
             cout << -1 << endl;
             return 0;
         }
-        b[i] = a[i] * ceil(1.0 * b[i+1] / a[i]);
-        //cout << ans1 << endl;
+        ans1 = ceil(1.0 * ans1 / a[i]) * a[i];
+        ans2 = floor(1.0 * ans2 / a[i]) * a[i] + a[i] - 1;
     }
-    /*
-    REP(i, k){
-        cout << b[i] << " \n"[i == k-1];
-    }
-    */
-    cout << b[0] << " " << b[0] + a[0]-1 << endl;
-
+    
+    cout << ans1 << " " << ans2 << endl;
 }
