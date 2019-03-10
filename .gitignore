@@ -1,7 +1,6 @@
 ignore/*
 *.out
 *.in
-*.json
 cmake-build-debug
 .idea
 .DS_Store
