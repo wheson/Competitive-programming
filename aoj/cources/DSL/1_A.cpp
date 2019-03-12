@@ -4,7 +4,6 @@
 using namespace std;
 using LL = long long;
 using P = pair<int, int>;
-using Tapris = tuple<int, int, int>;
 
 #define FOR(i, a, n) for(int i = (int)(a); i < (int)(n); ++i)
 #define REP(i, n) FOR(i, 0, n)
@@ -13,114 +12,73 @@ using Tapris = tuple<int, int, int>;
 #define all(x) (x).begin(),(x).end()
 
 const int INF = (int)1e9;
-const LL INFL = (LL)1e15;
+const LL INFL = (LL)1e19;
 const int MOD = 1e9 + 7;
 
-int dy[]={0, 0, 1, -1, 0};
-int dx[]={1, -1, 0, 0, 0};
-
-/*************** using variables ***************/
-int n, q;
-vector<int> com, x, y;
-/**********************************************/
-
-template <typename T>
-class UnionFind {
+// UnionFind木を構築します
+// 使用例:
+// UnionFind uni(n);
+// cout << uni.Same(1, 2) ? "YES" : "NO" << endl; <- NO
+// uni.Unite(1, 2);
+// cout << uni.Same(1, 2) ? "YES" : "NO" << endl; <- YES
+// cout << uni.GetSize(1) << endl;                <- 2
+class UnionFind
+{
     private:
-        vector<int> parent;  // 親
-        vector<int> rank;    // 木の深さ
+      vector<int> par;
+      vector<int> rank;
+      vector<int> sz;
 
-        // 重み付きUnionFindでのみ利用
-        vector<T> diffWeight; // 親ノードとの値の差
     public:
-        UnionFind(int n);          // n要素で初期化
-        int Find(int x);           // 木の根を返す
-        void Unite(int x, int y);  // xとyの属する集合を併合
-        bool Same(int x, int y);   // xとyが同じ集合に属するか否か
-        
-        // 重み付きUnionFindでのみ利用
-        void Unite(int x, int y, T w);
-        T Weight(int x);      // xの重みを返す
-        T Diff(int x, int y); // xとyの差を返す
+      UnionFind(int n) : par(n), rank(n, 0), sz(n, 1)
+      {
+          iota(par.begin(), par.end(), 0);
+      }
+      int Find(int x)
+      {
+          if (par[x] == x) return x;
+          else
+          {
+              int r = Find(par[x]);
+              return par[x] = r;
+          }
+      }
+      bool Unite(int x, int y)
+      {
+          x = Find(x);
+          y = Find(y);
+          if (x == y) return false;
+
+          if (rank[x] < rank[y]) swap(x, y);
+          par[y] = x;
+          if (rank[x] == rank[y]) rank[x]++;
+          sz[x] += sz[y];
+          return true;
+      }
+      bool Same(int x, int y)
+      {
+          if (Find(x) == Find(y)) return true;
+          else return false;
+      }
+      int GetSize(int x)
+      {
+          return sz[Find(x)];
+      }
 };
 
-template <typename T>
-UnionFind<T>::UnionFind(int n) : parent(n), rank(n), diffWeight(n, 0)
+signed main()
 {
-    for (int i = 0; i < n; i++) {
-        parent[i] = i;
-        rank[i] = 0;
-    }
-}
-
-template <typename T>
-int UnionFind<T>::Find(int x) {
-    if (parent[x] == x) {
-        return x;
-    } else {
-        int r = Find(parent[x]);
-        diffWeight[x] += diffWeight[parent[x]];
-        return parent[x] = r;
-    }
-}
-
-template <typename T>
-void UnionFind<T>::Unite(int x, int y) {
-    x = Find(x);
-    y = Find(y);
-    if (x == y) return;
-
-    if (rank[x] < rank[y]) {
-        parent[x] = y;
-    } else {
-        parent[y] = x;
-        if (rank[x] == rank[y]) rank[x]++;
-    }
-}
-
-template <typename T>
-bool UnionFind<T>::Same(int x, int y) { return Find(x) == Find(y); }
-
-template <typename T>
-void UnionFind<T>::Unite(int x, int y, T w){
-    w += Weight(x); w -= Weight(y);
-    x = Find(x); y = Find(y);
-    if(x == y) return;
-
-    if(rank[x] < rank[y]) swap(x, y), w = -w;
-
-    if(rank[x] == rank[y]) rank[x]++;
-    parent[y] = x;
-
-    diffWeight[y] = w;
-}
-
-template <typename T>
-T UnionFind<T>::Weight(int x){
-    Find(x);
-    return diffWeight[x];
-}
-
-template <typename T>
-T UnionFind<T>::Diff(int x, int y){
-    return Weight(y) - Weight(x);
-}
-
-signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
-    
+
+    int n, q;
     cin >> n >> q;
-    com.assign(q, 0);
-    x.assign(q, 0);
-    y.assign(q, 0);
-    
-    REP(i, q) cin >> com[i] >> x[i] >> y[i];
-
-    UnionFind<int> uf(n);
-    REP(i, q){
-        if(com[i] == 0) uf.Unite(x[i], y[i]);
-        else cout << (uf.Same(x[i], y[i]) ? 1 : 0) << endl;
+    UnionFind uni(n);
+    REP(i, q)
+    {
+        int c, x, y;
+        cin >> c >> x >> y;
+        if(c == 0) uni.Unite(x, y);
+        else cout << (uni.Same(x, y) ? 1 : 0) << endl;
     }
-
 }

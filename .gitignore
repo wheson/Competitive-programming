@@ -4,3 +4,4 @@ ignore/*
 cmake-build-debug
 .idea
 .DS_Store
+tmp/*

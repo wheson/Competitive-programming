@@ -15,50 +15,56 @@ const int INF = (int)1e9;
 const LL INFL = (LL)1e18;
 const int MOD = 1e9 + 7;
 
-class UnionFind {
+// UnionFindを構築します
+// 使用例:
+// UnionFind uni(n);
+// cout << uni.Same(1, 2) ? "YES" : "NO" << endl; <- NO
+// uni.Unite(1, 2);
+// cout << uni.Same(1, 2) ? "YES" : "NO" << endl; <- YES
+// cout << uni.GetSize(1) << endl;                <- 2
+class UnionFind
+{
     private:
-        vector<int> parent;  // 親
-        vector<int> rank;    // 木の深さ
-        vector<int> size;    // 根の持つ大きさ
+      vector<int> par;
+      vector<int> rank;
+      vector<int> sz;
 
     public:
-        UnionFind(int n);          // n要素で初期化
-        int find(int x);           // 木の根を返す
-        void unite(int x, int y);  // xとyの属する集合を併合
-        bool same(int x, int y);   // xとyが同じ集合に属するか否か
-        int getSize(int x);        // xの属する集合の大きさ
+      UnionFind(int n) : par(n), rank(n, 0), sz(n, 1)
+      {
+          iota(par.begin(), par.end(), 0);
+      }
+      int Find(int x)
+      {
+          if (par[x] == x) return x;
+          else
+          {
+              int r = Find(par[x]);
+              return par[x] = r;
+          }
+      }
+      bool Unite(int x, int y)
+      {
+          x = Find(x);
+          y = Find(y);
+          if (x == y) return false;
+
+          if (rank[x] < rank[y]) swap(x, y);
+          par[y] = x;
+          if (rank[x] == rank[y]) rank[x]++;
+          sz[x] += sz[y];
+          return true;
+      }
+      bool Same(int x, int y)
+      {
+          if (Find(x) == Find(y)) return true;
+          else return false;
+      }
+      int GetSize(int x)
+      {
+          return sz[Find(x)];
+      }
 };
-
-UnionFind::UnionFind(int n) : parent(n), rank(n, 0), size(n, 1) {
-    for (int i = 0; i < n; i++) parent[i] = i;
-}
-
-int UnionFind::find(int x) {
-    if (parent[x] == x) {
-        return x;
-    } else {
-        int r = find(parent[x]);
-        return parent[x] = r;
-    }
-}
-
-void UnionFind::unite(int x, int y) {
-    x = find(x);
-    y = find(y);
-    if (x == y) return;
-
-    if (rank[x] < rank[y]) {
-        parent[x] = y;
-    } else {
-        parent[y] = x;
-        if (rank[x] == rank[y]) rank[x]++;
-    }
-    size[find(x)] = size[x] + size[y];
-}
-
-bool UnionFind::same(int x, int y) { return find(x) == find(y); }
-
-int UnionFind::getSize(int x) { return size[find(x)]; }
 
 signed main(){
     cin.tie(0);
@@ -75,11 +81,11 @@ signed main(){
     vector<LL> ans(m);
     ans[0] = n * (n-1) / 2;
     REP(i, m-1){
-        if(uf.same(a[i], b[i])){
+        if(uf.Same(a[i], b[i])){
             ans[i+1] = ans[i];
         }else{
-            ans[i+1] = ans[i] - uf.getSize(a[i]) * uf.getSize(b[i]);
-            uf.unite(a[i], b[i]);
+            ans[i+1] = ans[i] - uf.GetSize(a[i]) * uf.GetSize(b[i]);
+            uf.Unite(a[i], b[i]);
         }
     }
     reverse(all(ans));
