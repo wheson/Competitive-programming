@@ -15,16 +15,22 @@ const int INF = (int)1e9;
 const LL INFL = (LL)1e19;
 const int MOD = 1e9 + 7;
 
-signed main()
-{
+signed main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
     
-    LL a, b, c;
-    cin >> a >> b >> c;
-    int x = 0, y = 0;
-    while(1)
+    string s;
+    int n;
+    cin >> n >> s;
+
+    LL ans = 1;
+    map<char, LL> mp;
+    REP(i, n) mp[s[i]]++;
+
+    for (int j = 0; j < 26; j++)
     {
-        b - a
+        ans = ans * (mp[(char)('a' + j)] + 1) % MOD;
     }
+
+    cout << (ans + MOD - 1) % MOD << endl;
 }
